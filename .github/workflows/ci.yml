@@ -19,11 +19,18 @@ jobs:
         with:
           python-version: "3.11"
 
-      # Use the official Astral Ruff action
-      - name: Run Ruff Linter and Formatter
+      # FIX: Use the native ruff check command
+      - name: Run Ruff Linter
         uses: astral-sh/ruff-action@v3
         with:
-          args: "check --check && ruff format --check"
+          args: "check"
+
+      # FIX: Run the native ruff format command right after
+      - name: Run Ruff Formatter
+        uses: astral-sh/ruff-action@v3
+        with:
+          args: "format --check"
+
 
   test:
     # Job 2: Your existing test job
