@@ -1,0 +1,19 @@
+{
+  "python.terminal.activateEnvironment": true,
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "[python]": {
+    // Set Ruff as the primary formatter for Python files
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    // Format the entire file automatically on save
+    "editor.formatOnSave": true,
+    // Define the sequence of actions when saving code
+    "editor.codeActionsOnSave": {
+      // Automatically sort and clean up imports on save
+    "source.organizeImports.ruff": "always",
+      // Automatically fix lint violations (unused variables, etc.) on save
+    "source.fixAll.ruff": "always"
+    }
+  },
+  // Ensure the extension looks for your local virtual environment interpreter
+  "ruff.interpreter": [".venv/Scripts/python.exe"]
+}

@@ -7,9 +7,30 @@ on:
     branches: [ main ]
 
 jobs:
+  # Job 1: Checks formatting and linting first
+  ruff-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Use the official Astral Ruff action
+      - name: Run Ruff Linter and Formatter
+        uses: astral-sh/ruff-action@v3
+        with:
+          args: "check --check && ruff format --check"
+
   test:
+    # Job 2: Your existing test job
     name: Run Tests
     runs-on: ubuntu-latest
+    # HIGHLIGHT: This line forces GitHub to wait for Ruff to pass successfully
+    needs: ruff-checks
 
     steps:
       - name: Checkout code
