@@ -1,0 +1,21 @@
+[project]
+name = "miloto"
+version = "0.1.0"
+description = "A cli application to analyze and track the colombian miloto game"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "babel>=2.18.0",
+    "beautifulsoup4>=4.15.0",
+    "dateparser>=1.4.1",
+    "playwright>=1.61.0",
+    "pydantic>=2.13.4",
+    "python-dotenv>=1.2.2",
+    "requests>=2.34.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.15.22",
+]
