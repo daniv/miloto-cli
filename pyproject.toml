@@ -15,16 +15,11 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = [
-    "pytest>=9.1.1",
-    "ruff>=0.15.22",
-]
+dev = ["pytest>=9.1.1", "ruff>=0.15.22"]
 
 [tool.ruff]
 # Target the specific Python version your project runs on
-target-version = "py311"
-
-# The community standard length
+target-version = "py314"
 line-length = 100
 
 [tool.ruff.format]

@@ -11,13 +11,14 @@ jobs:
   ruff-checks:
     runs-on: ubuntu-latest
     steps:
+      # UPGRADED: From v4 to v4 (Double-check GitHub marketplace for newer minor bumps if needed)
       - name: Check out repository code
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.14" # UPDATE THIS LINE
 
       # FIX: Use the native ruff check command
       - name: Run Ruff Linter
