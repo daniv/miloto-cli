@@ -2,14 +2,43 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, "chore/**", "feature/**", "bugfix/**" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "**" ]
 
 jobs:
+  # Job 1: Checks formatting and linting first
+  ruff-checks:
+    runs-on: ubuntu-latest
+    steps:
+      # UPGRADED: From v4 to v4 (Double-check GitHub marketplace for newer minor bumps if needed)
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14" # UPDATE THIS LINE
+
+      # FIX: Use the native ruff check command
+      - name: Run Ruff Linter
+        uses: astral-sh/ruff-action@v3
+        with:
+          args: "check"
+
+      # FIX: Run the native ruff format command right after
+      - name: Run Ruff Formatter
+        uses: astral-sh/ruff-action@v3
+        with:
+          args: "format --check"
+
+
   test:
+    # Job 2: Your existing test job
     name: Run Tests
     runs-on: ubuntu-latest
+    # HIGHLIGHT: This line forces GitHub to wait for Ruff to pass successfully
+    needs: ruff-checks
 
     steps:
       - name: Checkout code
@@ -29,5 +58,4 @@ jobs:
         run: uv sync --all-extras --dev
 
       - name: Run tests
-        # Replace this line with your actual testing tool (e.g., uv run pytest)
-        run: uv run python -m unittest discover 
+        run: uv run pytest 
